@@ -3,8 +3,16 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  # root 'welcome#index'
+  # get "auth/spotify" => 'sessions#new'
 
+  get "/auth/:provider/callback" => "sessions#create"
+  delete "/logout" => "sessions#destroy"
+
+  root 'suggestions#index'
+
+  get 'suggestions/search_by_term' => 'suggestions#search_by_term',  as: :search
+
+  post 'suggestions/display_results' => 'suggestions#display_results', as: :results
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

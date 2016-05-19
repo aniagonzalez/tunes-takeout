@@ -25,7 +25,14 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # gem 'bcrypt', '~> 3.1.7'
 gem 'yelp', require: 'yelp'
 gem 'rspotify'
+gem 'omniauth'
+gem 'omniauth-spotify'
 gem 'httparty'
+gem 'simplecov', :require => false, :group => :test
+
+
+gem 'omniauth-oauth2', '~> 1.3.1'
+
 
 # Use Unicorn as the app server
 # gem 'unicorn'
@@ -36,6 +43,8 @@ gem 'httparty'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
+  gem 'dotenv-rails'
+
 end
 
 group :development do

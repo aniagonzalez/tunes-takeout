@@ -1,0 +1,17 @@
+<h1> Your Results </h1>
+
+<% @pairings.each do |pair| %>
+
+  <p>
+    Food:
+    <%= pair[0].name%>
+    <%= pair[0].rating%>
+  </p>
+
+  <p>
+    Music:
+    <%= pair[1].name%>
+    <%= pair[1].url%>
+  </p>
+
+<% end %>

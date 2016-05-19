@@ -1,0 +1,19 @@
+<h1>Here's the list of top favorited suggestions</h1>
+
+<% @pairings.each do |pair| %>
+
+  <%food = pair[0]%>
+  <%music = pair[1]%>
+  <p>
+    Food:
+    <%= link_to food.name, food.url%>
+    Rating:<%= food.rating%>
+  </p>
+
+  <p>
+    Music:
+    <%= link_to music.name, music.url%>
+    <%= %>
+  </p>
+
+<% end %>

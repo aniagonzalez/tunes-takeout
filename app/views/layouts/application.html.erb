@@ -8,7 +8,18 @@
 </head>
 <body>
 
-<%= yield %>
+  <main class="container">
+    <nav class="navbar navbar-default">
+      <ul class="nav navbar-nav">
+        <li><%= link_to "Home", root_path %></li>
+        <li><%= link_to "Log In", "/auth/spotify" unless current_user %></li>
+        <li><%= link_to "Log Out", logout_path, method: :delete if current_user%></li>
+        <li><%= link_to "Search", search_path if current_user%></li>
+      </ul>
+    </nav>
+    <%= "Hi #{ current_user.uid }!" if current_user %>
+    <%= yield %>
+  </main>
 
 </body>
 </html>
