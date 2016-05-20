@@ -17,8 +17,8 @@ Rails.application.routes.draw do
   #   get 'products/:id' => 'catalog#view'
 
   #post to favorite
-  post 'suggestions/favorite/:suggestion_id' => 'suggestions#favorite', as: :favorite 
-
+  post 'suggestions/favorite/:suggestion_id' => 'suggestions#favorite', as: :favorite
+  delete 'suggestions/favorite/:suggestion_id' => 'suggestions#unfavorite', as: :unfavorite
 
   # Example of named route that can be invoked with purchase_url(id: product.id)
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase

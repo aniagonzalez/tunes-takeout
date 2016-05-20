@@ -23,6 +23,11 @@ module TunesTakeoutWrapper
       :body => {"suggestion": suggestion_id}.to_json)
   end
 
+  def self.remove_favorite(user_uid, suggestion_id)
+    HTTParty.delete(BASE_URL+"/users/#{user_uid}/favorites",
+      :body => {"suggestion": suggestion_id}.to_json)
+  end
+
   def self.favorites(user_uid)
     HTTParty.get(BASE_URL + "/users/#{user_uid}/favorites").parsed_response
   end

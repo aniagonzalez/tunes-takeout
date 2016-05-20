@@ -24,7 +24,7 @@
         <% if !favorite%>
           <%=link_to "Favorite", favorite_path(suggestion_id: suggestion_id), method: :post if current_user%>
         <% elsif favorite%>
-          <%=link_to "Unfavorite", favorite_path(suggestion_id: suggestion_id), method: :post if current_user%>
+          <%=link_to "Unfavorite", unfavorite_path(suggestion_id: suggestion_id), method: :delete if current_user%>
         <% end %>
       </td>
     </tr>
