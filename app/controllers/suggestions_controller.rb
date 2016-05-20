@@ -53,6 +53,7 @@ class SuggestionsController < ApplicationController
       array = []
       array << Food.find(yelp_id)  #first thing in array is yelp
       array << Music.find(spotify_id, spotify_type) #second thing is music
+      array << suggestion["id"]
       @pairings << array
 
     end
@@ -61,7 +62,8 @@ class SuggestionsController < ApplicationController
 
   def favorite
     #adds a suggestion into the favorite list for the signed-in User. This requires interaction with the Tunes & Takeout API.
-
+    TunesTakeoutWrapper.add_favorite(current_user.uid, params[:suggestion_id])
+    redirect_to root_path
   end
 
   def unfavorite

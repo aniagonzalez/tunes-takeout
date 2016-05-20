@@ -17,7 +17,9 @@
         <li><%= link_to "Search", search_path if current_user%></li>
       </ul>
     </nav>
-    <%= "Hi #{ current_user.uid }!" if current_user %>
+    <%= link_to current_user.name, current_user.url if current_user %>
+    <%= link_to (image_tag current_user.image), current_user.url if current_user %>
+
     <%= yield %>
   </main>
 

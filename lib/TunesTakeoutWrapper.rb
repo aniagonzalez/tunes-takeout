@@ -16,4 +16,10 @@ module TunesTakeoutWrapper
     HTTParty.get(BASE_URL + "/suggestions/top").parsed_response
     # parsed response is hash ["suggestions"] has array with 20 suggestions
   end
+
+  def self.add_favorite(user_uid, suggestion_id)
+    #/v1/users/:user_id/favorites
+    HTTParty.post(BASE_URL+"/users/#{user_uid}/favorites",
+      :body => {"suggestion": suggestion_id}.to_json)
+  end
 end

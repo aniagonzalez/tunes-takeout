@@ -4,14 +4,17 @@
   <tr>
     <th>Food</th>
     <th>Music</th>
+    <th>Favorite It</th>
   </tr>
   <% @pairings.each do |pair| %>
     <%food = pair[0]%>
     <%music = pair[1]%>
+    <%suggestion_id = pair[2]%>
     <tr>
       <td>
         <%= image_tag food.image_url%>
         <%= link_to food.name, food.url%>
+        <%=link_to "Favorite This", favorite_path(:suggestion_id), method: :post if current_user%>
       </td>
       <td>
         <%= image_tag music.image_url%>
