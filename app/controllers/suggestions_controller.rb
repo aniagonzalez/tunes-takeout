@@ -9,7 +9,6 @@ class SuggestionsController < ApplicationController
     #shows top 20 suggestions, ranked by total number of favorites
     suggestion_ids = TunesTakeoutWrapper.top["suggestions"] #this should return array of sugg ids
 
-
     @pairings = []
     suggestion_ids.each do |suggestion_id|
 
@@ -34,10 +33,6 @@ class SuggestionsController < ApplicationController
     end
   end
 
-  def favorites
-    #shows all suggestions favorited by the signed-in User
-
-  end
 
   def search_by_term
     #Returns a hash from the TunesTakeoutWrapper
@@ -47,7 +42,6 @@ class SuggestionsController < ApplicationController
     results = TunesTakeoutWrapper.search(params[:term])
     suggestions = results["suggestions"]
 
-
     @pairings = []
     suggestions.each do |suggestion|
 
@@ -55,10 +49,14 @@ class SuggestionsController < ApplicationController
       spotify_id = suggestion["music_id"]
       spotify_type = suggestion["music_type"]
 
+      favorite = is_favorite?(suggestion["id"])
+
       array = []
       array << Food.find(yelp_id)  #first thing in array is yelp
       array << Music.find(spotify_id, spotify_type) #second thing is music
       array << suggestion["id"]
+      array << favorite
+
       @pairings << array
 
     end
@@ -85,23 +83,29 @@ class SuggestionsController < ApplicationController
 
   def favorites
     favorites_response = TunesTakeoutWrapper.favorites(current_user.uid)
-    suggestions = favorites_response["suggestions"]
+    suggestion_ids = favorites_response["suggestions"] #this is array of suggestion_ids
 
     @pairings = []
-    suggestions.each do |suggestion|
+    suggestion_ids.each do |suggestion_id|
+
+      suggestion_object = TunesTakeoutWrapper.find(suggestion_id)
+      suggestion = suggestion_object["suggestion"]
 
       yelp_id = suggestion["food_id"]
       spotify_id = suggestion["music_id"]
       spotify_type = suggestion["music_type"]
 
+      favorite = is_favorite?(suggestion["id"])
+
       array = []
       array << Food.find(yelp_id)  #first thing in array is yelp
       array << Music.find(spotify_id, spotify_type) #second thing is music
       array << suggestion["id"]
-      @pairings << array
-    end 
+      array << favorite
 
-    # ready to pass on @pairings to view, but now lets try to reuse views with partials
+      @pairings << array
+    end
+
 
   end
 
