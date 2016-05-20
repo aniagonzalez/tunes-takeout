@@ -3,7 +3,7 @@ require 'yelp'
 require 'httparty'
 
 class SuggestionsController < ApplicationController
-  # extend TunesTakeoutWrapper
+#skip before action
 
   def index
     #shows top 20 suggestions, ranked by total number of favorites
@@ -81,6 +81,28 @@ class SuggestionsController < ApplicationController
     favorites_response = TunesTakeoutWrapper.favorites(current_user.uid)
     user_favorites = favorites_response["suggestions"]  #an array
     return user_favorites.include? suggestion_id
+  end
+
+  def favorites
+    favorites_response = TunesTakeoutWrapper.favorites(current_user.uid)
+    suggestions = favorites_response["suggestions"]
+
+    @pairings = []
+    suggestions.each do |suggestion|
+
+      yelp_id = suggestion["food_id"]
+      spotify_id = suggestion["music_id"]
+      spotify_type = suggestion["music_type"]
+
+      array = []
+      array << Food.find(yelp_id)  #first thing in array is yelp
+      array << Music.find(spotify_id, spotify_type) #second thing is music
+      array << suggestion["id"]
+      @pairings << array
+    end 
+
+    # ready to pass on @pairings to view, but now lets try to reuse views with partials
+
   end
 
 end
