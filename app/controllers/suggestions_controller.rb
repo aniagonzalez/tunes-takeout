@@ -16,7 +16,7 @@ class SuggestionsController < ApplicationController
       suggestion_object = TunesTakeoutWrapper.find(suggestion_id)
 
       suggestion = suggestion_object["suggestion"]
-      
+
       yelp_id = suggestion["food_id"]
       spotify_id = suggestion["music_id"]
       spotify_type = suggestion["music_type"]
@@ -53,7 +53,6 @@ class SuggestionsController < ApplicationController
       array = []
       array << Food.find(yelp_id)  #first thing in array is yelp
       array << Music.find(spotify_id, spotify_type) #second thing is music
-
       @pairings << array
 
     end

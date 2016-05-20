@@ -17,11 +17,13 @@ class Music
     @type = data.type
     @name = data.name
     @url = data.external_urls["spotify"]
-    # @image_url = data.images.first.url  #first is widest image
+    if data.type == "album" || data.type == "artist"
+      @image_url = data.images.first["url"] if !data.images.empty?
+    end
+    @image_url = data.album.images.first["url"] if data.type == "track" #first is widest image
   end
 
   def self.find(id, type)
-
     if type == "album"
       data = RSpotify::Album.find(id)
       self.new(data)

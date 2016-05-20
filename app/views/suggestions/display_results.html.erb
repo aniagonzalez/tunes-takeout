@@ -1,17 +1,23 @@
 <h1> Your Results </h1>
 
-<% @pairings.each do |pair| %>
 
-  <p>
-    Food:
-    <%= pair[0].name%>
-    <%= pair[0].rating%>
-  </p>
-
-  <p>
-    Music:
-    <%= pair[1].name%>
-    <%= pair[1].url%>
-  </p>
-
-<% end %>
+<table>
+  <tr>
+    <th>Food</th>
+    <th>Music</th>
+  </tr>
+  <% @pairings.each do |pair| %>
+    <%food = pair[0]%>
+    <%music = pair[1]%>
+    <tr>
+      <td>
+        <%= image_tag food.image_url%>
+        <%= link_to food.name, food.url%>
+      </td>
+      <td>
+        <%= image_tag music.image_url%>
+        <%= link_to music.name, music.url%>
+      </td>
+    </tr>
+  <% end %>
+<table>
