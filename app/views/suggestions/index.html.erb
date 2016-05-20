@@ -10,15 +10,22 @@
     <%food = pair[0]%>
     <%music = pair[1]%>
     <%suggestion_id = pair[2]%>
+    <%favorite = pair[3]%>
     <tr>
       <td>
         <%= image_tag food.image_url%>
         <%= link_to food.name, food.url%>
-        <%=link_to "Favorite This", favorite_path(:suggestion_id), method: :post if current_user%>
       </td>
       <td>
         <%= image_tag music.image_url%>
         <%= link_to music.name, music.url%>
+      </td>
+      <td>
+        <% if !favorite%>
+          <%=link_to "Favorite", favorite_path(suggestion_id: suggestion_id), method: :post if current_user%>
+        <% elsif favorite%>
+          <%=link_to "Unfavorite", favorite_path(suggestion_id: suggestion_id), method: :post if current_user%>
+        <% end %>
       </td>
     </tr>
   <% end %>

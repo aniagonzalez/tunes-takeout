@@ -22,4 +22,11 @@ module TunesTakeoutWrapper
     HTTParty.post(BASE_URL+"/users/#{user_uid}/favorites",
       :body => {"suggestion": suggestion_id}.to_json)
   end
+
+  def self.favorites(user_uid)
+    HTTParty.get(BASE_URL + "/users/#{user_uid}/favorites").parsed_response
+  end
+
+
+
 end

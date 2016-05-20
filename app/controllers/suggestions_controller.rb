@@ -21,9 +21,14 @@ class SuggestionsController < ApplicationController
       spotify_id = suggestion["music_id"]
       spotify_type = suggestion["music_type"]
 
+      favorite = is_favorite?(suggestion["id"])
+
+
       array = []
       array << Food.find(yelp_id)  #first thing in array is yelp
       array << Music.find(spotify_id, spotify_type) #second thing is music
+      array << suggestion["id"]
+      array << favorite
 
       @pairings << array
     end
@@ -69,6 +74,12 @@ class SuggestionsController < ApplicationController
   def unfavorite
     #removes a suggestion from the favorite list for the signed-in User. This requires interaction with the Tunes & Takeout API
 
+  end
+
+  def is_favorite?(suggestion_id)
+    favorites_response = TunesTakeoutWrapper.favorites(current_user.uid)
+    user_favorites = favorites_response["suggestions"]  #an array
+    return user_favorites.include? suggestion_id
   end
 
 end
