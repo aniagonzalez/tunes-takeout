@@ -36,11 +36,14 @@ GEM
       minitest (~> 5.1)
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
+    addressable (2.4.0)
+    ansi (1.5.0)
     arel (6.0.3)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
     builder (3.2.2)
     byebug (9.0.3)
+    coderay (1.1.1)
     coffee-rails (4.1.1)
       coffee-script (>= 2.2.0)
       railties (>= 4.0.0, < 5.1.x)
@@ -49,6 +52,8 @@ GEM
       execjs
     coffee-script-source (1.10.0)
     concurrent-ruby (1.0.2)
+    crack (0.4.3)
+      safe_yaml (~> 1.0.0)
     debug_inspector (0.0.2)
     docile (1.1.5)
     domain_name (0.5.20160310)
@@ -65,6 +70,7 @@ GEM
       faraday (>= 0.7.4, < 0.10)
     globalid (0.3.6)
       activesupport (>= 4.1.0)
+    hashdiff (0.3.0)
     hashie (3.4.4)
     http-cookie (1.0.2)
       domain_name (~> 0.5)
@@ -85,9 +91,21 @@ GEM
       nokogiri (>= 1.5.9)
     mail (2.6.4)
       mime-types (>= 1.16, < 4)
+    method_source (0.8.2)
     mime-types (2.99.1)
     mini_portile2 (2.0.0)
+    minispec-metadata (2.0.0)
+      minitest
     minitest (5.9.0)
+    minitest-reporters (1.1.9)
+      ansi
+      builder
+      minitest (>= 5.0)
+      ruby-progressbar
+    minitest-vcr (1.4.0)
+      minispec-metadata (~> 2.0)
+      minitest (>= 4.7.5)
+      vcr (>= 2.9)
     multi_json (1.12.0)
     multi_xml (0.5.5)
     multipart-post (2.0.0)
@@ -109,6 +127,12 @@ GEM
     omniauth-spotify (0.0.9)
       omniauth-oauth2 (~> 1.1)
     pg (0.18.4)
+    pry (0.10.3)
+      coderay (~> 1.1.0)
+      method_source (~> 0.8.1)
+      slop (~> 3.4)
+    pry-rails (0.3.4)
+      pry (>= 0.9.10)
     rack (1.6.4)
     rack-test (0.6.3)
       rack (>= 1.0)
@@ -146,6 +170,8 @@ GEM
     rspotify (1.18.0)
       omniauth-oauth2 (~> 1.3.1)
       rest-client (~> 1.7)
+    ruby-progressbar (1.8.1)
+    safe_yaml (1.0.4)
     sass (3.4.22)
     sass-rails (5.0.4)
       railties (>= 4.0.0, < 5.0)
@@ -162,6 +188,7 @@ GEM
       json (~> 1.8)
       simplecov-html (~> 0.10.0)
     simplecov-html (0.10.0)
+    slop (3.6.0)
     spring (1.7.1)
     sprockets (3.6.0)
       concurrent-ruby (~> 1.0)
@@ -180,11 +207,16 @@ GEM
     unf (0.1.4)
       unf_ext
     unf_ext (0.0.7.2)
+    vcr (3.0.3)
     web-console (2.3.0)
       activemodel (>= 4.0)
       binding_of_caller (>= 0.7.2)
       railties (>= 4.0)
       sprockets-rails (>= 2.0, < 4.0)
+    webmock (2.0.3)
+      addressable (>= 2.3.6)
+      crack (>= 0.3.2)
+      hashdiff
     yelp (2.1.2)
       faraday (~> 0.8, >= 0.8.0)
       faraday_middleware (~> 0.8, >= 0.8.0)
@@ -200,10 +232,13 @@ DEPENDENCIES
   httparty
   jbuilder (~> 2.0)
   jquery-rails
+  minitest-reporters
+  minitest-vcr
   omniauth
   omniauth-oauth2 (~> 1.3.1)
   omniauth-spotify
   pg (~> 0.15)
+  pry-rails
   rails (= 4.2.6)
   rspotify
   sass-rails (~> 5.0)
@@ -212,7 +247,11 @@ DEPENDENCIES
   spring
   uglifier (>= 1.3.0)
   web-console (~> 2.0)
+  webmock
   yelp
+
+RUBY VERSION
+   ruby 2.3.0p0
 
 BUNDLED WITH
    1.12.4
