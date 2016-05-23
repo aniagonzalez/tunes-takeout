@@ -20,14 +20,18 @@ class SuggestionsController < ApplicationController
       spotify_id = suggestion["music_id"]
       spotify_type = suggestion["music_type"]
 
-      favorite = is_favorite?(suggestion["id"])
+      if current_user
+        favorite = is_favorite?(suggestion["id"])
+      end
 
 
       array = []
       array << Food.find(yelp_id)  #first thing in array is yelp
       array << Music.find(spotify_id, spotify_type) #second thing is music
       array << suggestion["id"]
-      array << favorite
+      if favorite
+        array << favorite
+      end 
 
       @pairings << array
     end

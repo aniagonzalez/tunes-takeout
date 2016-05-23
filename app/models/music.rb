@@ -18,9 +18,9 @@ class Music
     @name = data.name
     @url = data.external_urls["spotify"]
     if data.type == "album" || data.type == "artist"
-      @image_url = data.images.first["url"] if !data.images.empty?
+      @image_url = data.images.last["url"] if !data.images.empty?
     end
-    @image_url = data.album.images.first["url"] if data.type == "track" #first is widest image
+    @image_url = data.album.images.last["url"] if data.type == "track" #first is widest image
   end
 
   def self.find(id, type)

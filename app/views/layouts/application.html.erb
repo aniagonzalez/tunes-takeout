@@ -3,6 +3,8 @@
 <head>
   <title>TunesTakeout</title>
   <%= stylesheet_link_tag    'application', media: 'all' %>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+	<link href='https://fonts.googleapis.com/css?family=Rock+Salt|The+Girl+Next+Door' rel='stylesheet' type='text/css'>
   <%= javascript_include_tag 'application' %>
   <%= csrf_meta_tags %>
 </head>
@@ -17,9 +19,17 @@
         <li><%= link_to "Search", search_path if current_user%></li>
         <li><%= link_to "My Favorites", favorites_path if current_user%></li>
       </ul>
+      <div class = "avatar-container">
+        <% if current_user %>
+          <%= link_to current_user.name, current_user.url%>
+          <%= link_to (image_tag current_user.image, class: "avatar_image", height: '60', width: '60'), current_user.url%>
+        <% else %>
+          <%= link_to "Guest", "/auth/spotify"%>
+          <%= image_tag "https://cypressinheritance.com/wp-content/uploads/MysteryAvatar.png", class: "avatar_image", height: '60', width: '60' %>
+        <% end %>
+      </div>
     </nav>
-    <%= link_to current_user.name, current_user.url if current_user %>
-    <%= link_to (image_tag current_user.image), current_user.url if current_user %>
+
 
 
     <%= yield %>

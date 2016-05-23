@@ -1,31 +1,36 @@
 
-<table>
+<table class = "suggestion-table">
   <tr>
     <th>Food</th>
     <th>Music</th>
+  <%if current_user %>
     <th>Favorite It</th>
+  <% end%>
   </tr>
   <% @pairings.each do |pair| %>
     <%food = pair[0]%>
     <%music = pair[1]%>
     <%suggestion_id = pair[2]%>
-    <%favorite = pair[3]%>
+    <%favorite = pair[3] if current_user%>
     <tr>
       <td>
-        <%= image_tag food.image_url%>
+        <%= image_tag food.image_url%><br>
         <%= link_to food.name, food.url%>
       </td>
       <td>
-        <%= image_tag music.image_url%>
+        <%= image_tag music.image_url%><br>
         <%= link_to music.name, music.url%>
       </td>
-      <td>
-        <% if !favorite%>
-          <%=link_to "Favorite", favorite_path(suggestion_id: suggestion_id), method: :post if current_user%>
-        <% elsif favorite%>
-          <%=link_to "Unfavorite", unfavorite_path(suggestion_id: suggestion_id), method: :delete if current_user%>
-        <% end %>
-      </td>
+
+      <% if current_user %>
+        <td>
+          <% if !favorite%>
+            <%=link_to "Favorite", favorite_path(suggestion_id: suggestion_id), method: :post if current_user%>
+          <% elsif favorite%>
+            <%=link_to "Unfavorite", unfavorite_path(suggestion_id: suggestion_id), method: :delete if current_user%>
+          <% end %>
+        </td>
+      <% end %>
     </tr>
   <% end %>
 <table>
